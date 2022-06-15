@@ -3,18 +3,21 @@ import MapOfNL from './images/MapOfNL.png'
 
  class Map {
     //canvas
-   private pixiWidth = 600
-   private pixiHeight = 650
+//    private pixiWidth = 600
+//    private pixiHeight = 650
+
 
     //globals
     private pixi : PIXI.Application;
     private loader : PIXI.Loader;
+    private mapOfNL : PIXI.Sprite;
 
     doomClock:number = 1250 
+     map: any;
 
     
     constructor(){
-        this.pixi = new PIXI.Application({ width: this.pixiWidth, height: this.pixiHeight });
+        this.pixi = new PIXI.Application({ width: window.innerWidth, height: window.innerHeight, backgroundColor: 0x1099bb });
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
         document.body.appendChild(this.pixi.view);
@@ -25,10 +28,13 @@ import MapOfNL from './images/MapOfNL.png'
 
     }
    private loadCompleted(){
-        let map = new PIXI.Sprite(this.loader.resources["mapTexture"].texture!);
-        map.height = this.pixiHeight;
-        map.width = this.pixiWidth;
-        this.pixi.stage.addChild(map);
+        this.map = new PIXI.Sprite(this.loader.resources["mapTexture"].texture!);
+        // map.height = this.pixiHeight;
+        // map.width = this.pixiWidth;
+        this.map.x = 250
+        this.map.y = 30
+        this.map.scale.set(0.5)
+        this.pixi.stage.addChild(this.map);
 
         this.pixi.ticker.add((delta)=>this.update(delta));
 

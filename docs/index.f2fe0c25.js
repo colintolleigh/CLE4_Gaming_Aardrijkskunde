@@ -508,14 +508,12 @@ var _pixiJs = require("pixi.js");
 var _mapOfNLPng = require("./images/MapOfNL.png");
 var _mapOfNLPngDefault = parcelHelpers.interopDefault(_mapOfNLPng);
 class Map {
-    //canvas
-    pixiWidth = 600;
-    pixiHeight = 650;
     doomClock = 1250;
     constructor(){
         this.pixi = new _pixiJs.Application({
-            width: this.pixiWidth,
-            height: this.pixiHeight
+            width: window.innerWidth,
+            height: window.innerHeight,
+            backgroundColor: 0x1099bb
         });
         this.pixi.stage.interactive = true;
         this.pixi.stage.hitArea = this.pixi.renderer.screen;
@@ -525,10 +523,13 @@ class Map {
         this.loader.load(()=>this.loadCompleted());
     }
     loadCompleted() {
-        let map = new _pixiJs.Sprite(this.loader.resources["mapTexture"].texture);
-        map.height = this.pixiHeight;
-        map.width = this.pixiWidth;
-        this.pixi.stage.addChild(map);
+        this.map = new _pixiJs.Sprite(this.loader.resources["mapTexture"].texture);
+        // map.height = this.pixiHeight;
+        // map.width = this.pixiWidth;
+        this.map.x = 250;
+        this.map.y = 30;
+        this.map.scale.set(0.5);
+        this.pixi.stage.addChild(this.map);
         this.pixi.ticker.add((delta)=>this.update(delta));
     }
     update(delta) {
