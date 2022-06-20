@@ -31,7 +31,7 @@ import MapOfNL from './images/MapOfNL.png'
         this.map = new PIXI.Sprite(this.loader.resources["mapTexture"].texture!);
         // map.height = this.pixiHeight;
         // map.width = this.pixiWidth;
-        this.map.x = 250
+        this.map.x = 400
         this.map.y = 30
         this.map.scale.set(0.5)
         this.pixi.stage.addChild(this.map);
